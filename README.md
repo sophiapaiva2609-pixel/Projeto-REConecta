@@ -11,4 +11,7 @@ Reconhece picada de escorpião e de cobra e indica a unidade com o soro correto
 Funciona com ou sem acentos (escorpião ou escorpiao)
 Pergunta qual foi o animal quando a mensagem é vaga (ex.: "fui picado")
 Mostra o aviso do SAMU (192) em toda resposta de emergência
-Avisa quando nenhuma unidade cadastrada tem o soro
+Avisa quando nenhuma unidade cadastrada tem o soro.
+
+🛠️ Tecnologias
+Python
