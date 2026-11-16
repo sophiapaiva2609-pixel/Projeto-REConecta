@@ -34,7 +34,7 @@ class MensagemUsuario(BaseModel):
 def responder_chat(dados: MensagemUsuario):
     texto = dados.mensagem.lower()
     
-    # 2. Lógica para detectar caso de escorpião / animais peçonhentos
+    
     if "escorpião" in texto or "picada" in texto or "mordida" in texto:
         unidades_aptas = [u for u in BASE_DADOS_UNIDADES if "soro antiescorpiônico" in u["insumos"]]
         
