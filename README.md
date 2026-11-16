@@ -1,79 +1,14 @@
-from fastapi import FastAPI
+📌 O problema
 
-from pydantic import BaseModel
+Em uma emergência, como uma picada de escorpião ou de cobra, nem toda unidade de saúde tem o soro necessário. Quem vai ao posto errado perde um tempo que pode ser decisivo.
 
-app = FastAPI()
+💡 A solução
 
-BASE_DADOS_UNIDADES = [
-    {
-        "nome": "UPA do Ibura",
-        
-        "horario": "24 horas (Todos os dias)",
-        
-        "atende_urgencia": True,
-        
-        "insumos": ["soro antiescorpiônico", "soro antiofídico", "clinica medica", "pediatria"],
-        
-        "status": "Aberta"
-    },
-    {
-        "nome": "Policlínica e Maternidade Professor Barros Lima",
-        
-        "horario": "Segunda a Sexta, das 07h às 19h",
-        
-        "atende_urgencia": False,
-        
-        "insumos": ["clinica medica", "pediatria", "ginecologia"],
-        
-        "status": "Fechada (Abre amanhã às 07h)"
-    },
-    {
-        "nome": "UPA dos Torrões",
-        
-        "horario": "24 horas (Todos os dias)",
-        
-        "atende_urgencia": True,
-        
-        "insumos": ["soro antiescorpiônico", "ortopedia", "clinica medica"],
-        
-        "status": "Aberta"
-    }
-]
+O REConecta é um chatbot que recebe a descrição do problema em linguagem natural e indica as unidades cadastradas que possuem o insumo adequado, com horário de funcionamento e orientações de segurança, como ligar para o SAMU (192).
 
-class MensagemUsuario(BaseModel):
-    mensagem: str
-
-@app.post("/chat")
-def responder_chat(dados: MensagemUsuario):
-    texto = dados.mensagem.lower()
-    
-    
-    if "escorpião" in texto or "picada" in texto or "mordida" in texto:
-    
-        unidades_aptas = [u for u in BASE_DADOS_UNIDADES if "soro antiescorpiônico" in u["insumos"]]
-        
-        resposta = (
-            "⚠️ **Atenção: Picada de animal peçonhento exige atendimento rápido!**\n\n"
-            
-            "Não vá para qualquer posto. Encontrei as unidades mais próximas que **possuem o soro antiescorpiônico** disponível agora:\n\n"
-        )
-        
-        for u in unidades_aptas:
-            resposta += f"🏥 **{u['nome']}**\n"
-            
-            resposta += f"   • Status: {u['status']} ({u['horario']})\n"
-            
-            resposta += f"   • O que tem: Soro antiescorpiônico disponível\n\n"
-            
-        resposta += "Recomendamos ligar para o SAMU (192) caso haja sintomas graves de envenenamento."
-        return {"resposta": resposta}
-    
-   
-    else:
-        return {
-            "resposta": (
-                "Olá! Sou o assistente do **REConecta**. "
-                "Para que eu possa te indicar a unidade correta sem risco de peregrinação, "
-                "me diga qual é o sintoma ou o problema médico (ex: *fui picado por escorpião*, *estou com febre alta*)."
-            )
-        }
+✨ Funcionalidades
+Reconhece picada de escorpião e de cobra e indica a unidade com o soro correto
+Funciona com ou sem acentos (escorpião ou escorpiao)
+Pergunta qual foi o animal quando a mensagem é vaga (ex.: "fui picado")
+Mostra o aviso do SAMU (192) em toda resposta de emergência
+Avisa quando nenhuma unidade cadastrada tem o soro
